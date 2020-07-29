@@ -12,7 +12,7 @@ const GameContainer = styled.div`
   justify-content: space-around;
   section {
     background-color: lightgray;
-    width: 40%
+    width: 40%;
   }
 
 `

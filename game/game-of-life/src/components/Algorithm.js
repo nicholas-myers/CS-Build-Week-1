@@ -28,7 +28,7 @@ export default function Algorithm() {
       <p>Logic</p>
       <li>if current node is dead and # of alive neighbors is exactly three then it becomes alive</li>
       <li>if current node is alive and # of alive neighbors is exactly three then it becomes alive</li>
-
+<li>create a number of div boxes that have a state of on or off</li>
       <h2>Execute</h2>
       <h2>Review</h2>
     </section>
