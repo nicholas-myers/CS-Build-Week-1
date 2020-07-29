@@ -30,13 +30,18 @@ export default function Grid() {
   let x = [];
   let y = [];
   //
-  const [grid, setGrid] = useState(() => {
+  const emptyGrid = () => {
     const x = [];
     for (let i = 0; i < rows; i++) {
       x.push(Array.from(Array(columns), () => 0));
     }
     return x;
+}
+  const [grid, setGrid] = useState(() => {
+    return emptyGrid()
   });
+
+  
 
   const [running, setRunning] = useState(false);
   const runningRef = useRef(running);
@@ -69,7 +74,7 @@ export default function Grid() {
         })
     })
     
-    setTimeout(runGame, 1000);
+    setTimeout(runGame, 150);
   }, []);
 
   console.log(grid);
@@ -79,7 +84,23 @@ export default function Grid() {
           setRunning(!running)
           runningRef.current = true
           runGame()}
-      }>Start</button>
+      }>{running ? "Stop" : "Start"}</button>
+      <button 
+        onClick={()=> {
+            //   random
+            const x = [];
+            for (let i = 0; i < rows; i++) {
+                x.push(Array.from(Array(columns), () => Math.random() > .5 ? 1 : 0)
+                );
+            }
+            setGrid(x)
+        }}
+      >
+      
+      Random</button>
+      <button onClick={()=> {
+          setGrid(emptyGrid())
+      }}>Clear</button>
       <div
         style={{
           display: "grid",
