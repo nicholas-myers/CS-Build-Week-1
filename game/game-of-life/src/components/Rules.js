@@ -1,8 +1,19 @@
 import React from "react";
+import styled from "styled-components"
+
+const StyledRules = styled.section`
+  width: 40%;
+  background-color: lightgray;
+  padding: 1%;
+  h2 {
+    text-align: center;
+    margin-bottom: 3%;
+  }
+`
 
 export default function Rules() {
   return (
-    <section>
+    <StyledRules>
       <h2>Rules</h2>
       <p>
         Every cell interacts with its eight neighbours, which are the cells that
@@ -33,6 +44,6 @@ export default function Rules() {
       <li>Any dead cell with three live neighbours becomes a live cell.</li>{" "}
       <li>All other live cells die in the next generation.</li>{" "}
       <li>Similarly, all other dead cells stay dead.</li>
-    </section>
+    </StyledRules>
   );
 }
