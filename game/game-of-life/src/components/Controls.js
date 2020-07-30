@@ -2,7 +2,15 @@ import React from "react";
 import styled from "styled-components"
 
 const CenterControls = styled.div`
-    width: 10%;
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: column;
+    border: 1px solid black;
+    form {
+        width: 100%;
+    }
 `
 
 export default function Controls() {

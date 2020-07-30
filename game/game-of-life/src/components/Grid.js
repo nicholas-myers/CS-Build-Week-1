@@ -7,12 +7,25 @@ const SideBySide = styled.section`
   display: flex;
   justify-content: space-between;
   width: 40%;
+  h2 {
+    color: lightgray;
+  }
+  label {
+    color: lightgray;
+  }
 `;
 
 const GridControls = styled.div`
+  display: flex;
+  justify-content: space-around;
   margin-top: 1%;
-  
-`
+  margin-bottom: 1%;
+  button {
+    padding: 1rem;
+  }
+`;
+
+
 
 const operations = [
   [0, 1],
@@ -85,7 +98,7 @@ export default function Grid() {
     <SideBySide>
       <div>
         <h2>Grid</h2>
-        <div>
+        <GridControls>
           <button
             onClick={() => {
               setRunning(!running);
@@ -98,27 +111,31 @@ export default function Grid() {
           <button
             onClick={() => {
               //   random
-              const x = [];
-              for (let i = 0; i < rows; i++) {
-                x.push(
-                  Array.from(Array(columns), () =>
-                    Math.random() > 0.5 ? 1 : 0
-                  )
-                );
+              if (running == false) {
+                const x = [];
+                for (let i = 0; i < rows; i++) {
+                  x.push(
+                    Array.from(Array(columns), () =>
+                      Math.random() > 0.5 ? 1 : 0
+                    )
+                  );
+                }
+                setGrid(x);
               }
-              setGrid(x);
             }}
           >
             Random
           </button>
           <button
             onClick={() => {
-              setGrid(emptyGrid());
+              if (running == false) {
+                setGrid(emptyGrid());
+              }
             }}
           >
             Clear
           </button>
-        </div>
+        </GridControls>
         <div
           style={{
             display: "grid",
@@ -131,10 +148,12 @@ export default function Grid() {
             rows.map((col, y) => (
               <div
                 onClick={() => {
-                  const newGrid = produce(grid, (gridCopy) => {
-                    gridCopy[x][y] = gridCopy[x][y] ? 0 : 1;
-                  });
-                  setGrid(newGrid);
+                  if (running == false) {
+                    const newGrid = produce(grid, (gridCopy) => {
+                      gridCopy[x][y] = gridCopy[x][y] ? 0 : 1;
+                    });
+                    setGrid(newGrid);
+                  }
                 }}
                 style={{
                   width: 20,

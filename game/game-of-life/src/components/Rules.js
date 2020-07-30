@@ -1,15 +1,19 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 
 const StyledRules = styled.section`
+  display: flex;
+  justify-content: space-around;
+  flex-flow: column;
   width: 40%;
   background-color: lightgray;
   padding: 1%;
+  height: 90%;
   h2 {
     text-align: center;
     margin-bottom: 3%;
   }
-`
+`;
 
 export default function Rules() {
   return (
