@@ -9,6 +9,10 @@
   font-family: 'Press Start 2P', cursive;
 }
 
+.App {
+  width: 100%;
+}
+
 h2 {
   text-align: center;
   margin-bottom: 3%;

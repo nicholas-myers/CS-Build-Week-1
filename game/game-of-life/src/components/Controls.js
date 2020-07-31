@@ -4,15 +4,16 @@ import produce from "immer"
 
 
 const CenterControls = styled.div`
+
   width: 30%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-flow: column;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   form {
     width: 100%;
-    height: 70%;
+    height: 90%;
     display: flex;
     flex-flow: column;
     justify-content: space-around;
