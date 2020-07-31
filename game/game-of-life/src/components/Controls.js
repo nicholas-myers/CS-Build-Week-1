@@ -12,7 +12,7 @@ const CenterControls = styled.div`
   border: 1px solid black;
   form {
     width: 100%;
-    height: 50%;
+    height: 70%;
     display: flex;
     flex-flow: column;
     justify-content: space-around;
@@ -21,10 +21,29 @@ const CenterControls = styled.div`
     label {
       color: lightgray;
     }
+    button {
+      padding: .5rem;
+    }
   }
 `;
 
-export default function Controls({speed, setSpeed, gridSize, setGridSize, running}) {
+const BYR = styled.button`
+  background-color: black;
+  border: 1px solid yellow;
+  color: red;
+`
+const BTP = styled.button`
+  background-color: seagreen;
+  border: 1px solid cyan;
+  color: violet;
+`
+const RESET = styled.button`
+  background-color: lightgray;
+  border: 1px solid black;
+  color: black;
+`
+
+export default function Controls({speed, setSpeed, gridSize, setGridSize, running, gridColors, setGridColors}) {
 
   const changeSpeed = (e) => {
     console.log(e.target.value)
@@ -37,6 +56,16 @@ export default function Controls({speed, setSpeed, gridSize, setGridSize, runnin
     if (running == false) {
       setGridSize(Number(e.target.value))
     }
+  }
+
+  const changeColorToRBY = (e) => {
+    setGridColors(["black", "yellow", "red"])
+  }
+  const changeColorToBTP = (e) => {
+    setGridColors(["seagreen", "cyan", "violet"])
+  }
+  const resetColors = (e) => {
+    setGridColors(["lightgray", "black", "black"])
   }
 
   return (
@@ -56,12 +85,7 @@ export default function Controls({speed, setSpeed, gridSize, setGridSize, runnin
         value={speed}
         onChange={changeSpeed}
         />
-      </form>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
+      
         <label htmlFor="grid-size">Change grid size.</label>
         <input 
         name="grid-size"
@@ -71,15 +95,12 @@ export default function Controls({speed, setSpeed, gridSize, setGridSize, runnin
         value={gridSize}
         onChange={changeSize}
         />
+      
+        <label>Change Grid Colors</label>
+        <BYR onClick={changeColorToRBY}>CELL</BYR>
+        <BTP onClick={changeColorToBTP}>CELL</BTP>
+        <RESET onClick={resetColors}>RESET</RESET>
       </form>
-
-      <form onSubmit={(e) => {
-          e.preventDefault();
-        }}>
-          
-        <button>Change Grid Color</button>
-      </form>
-      <button>Change Cell Color</button>
     </CenterControls>
   );
 }

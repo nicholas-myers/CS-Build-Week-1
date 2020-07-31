@@ -41,7 +41,7 @@ export default function Grid() {
   const [gridSize, setGridSize] = useState(25);
   // set the initial speed of the game
   const [speed, setSpeed] = useState(150)
-  
+  const [gridColors, setGridColors] = useState(["lightgray", "black", "black"])
   // create an empty grid
   const emptyGrid = () => {
     // we create an array
@@ -162,7 +162,7 @@ export default function Grid() {
             display: "grid",
             gridTemplateColumns: `repeat(${gridSize}, 20px)`,
             gridColumnGap: "0px",
-            backgroundColor: "lightgray",
+            backgroundColor: gridColors[0],
           }}
         >
           {grid.map((rows, x) =>
@@ -180,15 +180,15 @@ export default function Grid() {
                 style={{
                   width: 20,
                   height: 20,
-                  backgroundColor: grid[x][y] ? "black" : undefined,
-                  border: "1px solid black",
+                  backgroundColor: grid[x][y] ? gridColors[2] : undefined,
+                  border: `1px solid ${gridColors[1]}`,
                 }}
               ></div>
             ))
           )}
         </div>
       </div>
-      <Controls speed={speed} setSpeed={setSpeed} gridSize={gridSize} setGridSize={setGridSize} running={running}/>
+      <Controls speed={speed} setSpeed={setSpeed} gridSize={gridSize} setGridSize={setGridSize} running={running} gridColors={gridColors} setGridColors={setGridColors}/>
     </SideBySide>
   );
 }
