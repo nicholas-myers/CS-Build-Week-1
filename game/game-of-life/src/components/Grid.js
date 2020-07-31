@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import styled from "styled-components";
 import produce from "immer";
 import Controls from "./Controls";
@@ -6,7 +6,7 @@ import Controls from "./Controls";
 const SideBySide = styled.section`
   display: flex;
   justify-content: space-between;
-  width: 40%;
+  width: 50%;
   h2 {
     color: lightgray;
   }
@@ -24,10 +24,8 @@ const GridControls = styled.div`
     padding: 1rem;
   }
 `;
-
-
-
-const operations = [
+// create the connection from the cell to its neighbors
+const connections = [
   [0, 1],
   [0, -1],
   [1, -1],
@@ -39,14 +37,17 @@ const operations = [
 ];
 
 export default function Grid() {
-  const gridSize = useState();
+  // 
+  const [gridSize, setGridSize] = useState(25);
   // set the number of columns
-  let columns = 25;
+  let columns = gridSize;
   // set the number of rows
-  let rows = 25;
+  let rows = gridSize;
+
+ 
 
   // create a number of divs per the amount of columns and rows represented by empty x ann y arrays
-  let x = [];
+  // let x = [];
   // create an empty grid
   const emptyGrid = () => {
     const x = [];
@@ -58,6 +59,10 @@ export default function Grid() {
   const [grid, setGrid] = useState(() => {
     return emptyGrid();
   });
+  useEffect(()=> {
+    setGrid(emptyGrid())
+  }, [gridSize])
+  
 
   const [running, setRunning] = useState(false);
   const runningRef = useRef(running);
@@ -72,7 +77,7 @@ export default function Grid() {
         for (let x = 0; x < rows; x++) {
           for (let y = 0; y < columns; y++) {
             let neighbors = 0;
-            operations.forEach(([r, c]) => {
+            connections.forEach(([r, c]) => {
               const newX = x + r;
               const newY = y + c;
               if (newX >= 0 && newX < rows && newY >= 0 && newY < columns) {
@@ -93,7 +98,7 @@ export default function Grid() {
     setTimeout(runGame, 250);
   }, []);
 
-  console.log(grid);
+  // console.log(grid);
   return (
     <SideBySide>
       <div>
@@ -166,7 +171,7 @@ export default function Grid() {
           )}
         </div>
       </div>
-      <Controls />
+      <Controls gridSize={gridSize} setGridSize={setGridSize} setGrid={setGrid} emptyGrid={emptyGrid}/>
     </SideBySide>
   );
 }

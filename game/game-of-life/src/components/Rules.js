@@ -5,13 +5,19 @@ const StyledRules = styled.section`
   display: flex;
   justify-content: space-around;
   flex-flow: column;
-  width: 40%;
+  width: 30%;
   background-color: lightgray;
   padding: 1%;
-  height: 90%;
+  /* height: 90%; */
   h2 {
     text-align: center;
-    margin-bottom: 3%;
+    /* margin-bottom: 3%; */
+  }
+  p {
+    margin: 3% 0;
+  }
+  li {
+    margin: 1% 0;
   }
 `;
 
@@ -19,11 +25,8 @@ export default function Rules() {
   return (
     <StyledRules>
       <h2>Rules</h2>
-      <p>
-        Every cell interacts with its eight neighbours, which are the cells that
-        are horizontally, vertically, or diagonally adjacent.
-      </p>
-      <p>At each step in time, the following transitions occur:</p>
+      <p>A single cell is connected to eight other cells surrounding it in every direction.</p>
+      <p>Each cell has a lyfe cycle with the following conditions:</p>
       <li>
         Any live cell with fewer than two live neighbours dies, as if by
         underpopulation.
