@@ -37,35 +37,29 @@ const connections = [
 ];
 
 export default function Grid() {
-  // 
+  // set the size of the grid
   const [gridSize, setGridSize] = useState(25);
-  // set the number of columns
-  let columns = gridSize;
-  // set the number of rows
-  let rows = gridSize;
-
- 
-
+  const [speed, setSpeed] = useState(150)
   // create a number of divs per the amount of columns and rows represented by empty x ann y arrays
   // let x = [];
   // create an empty grid
+
+
   const emptyGrid = () => {
     const x = [];
-    for (let i = 0; i < rows; i++) {
-      x.push(Array.from(Array(columns), () => 0));
+    for (let i = 0; i < gridSize; i++) {
+      x.push(Array.from(Array(gridSize), () => 0));
     }
     return x;
   };
   const [grid, setGrid] = useState(() => {
     return emptyGrid();
   });
-  useEffect(()=> {
-    setGrid(emptyGrid())
-  }, [gridSize])
-  
+ 
 
   const [running, setRunning] = useState(false);
   const runningRef = useRef(running);
+  const speedRef = useRef(speed)
   runningRef.current = running;
   const runGame = useCallback(() => {
     if (!runningRef.current) {
@@ -73,14 +67,15 @@ export default function Grid() {
     }
     // simulate
     setGrid((g) => {
+      console.log(g)
       return produce(g, (gridCopy) => {
-        for (let x = 0; x < rows; x++) {
-          for (let y = 0; y < columns; y++) {
+        for (let x = 0; x < gridSize; x++) {
+          for (let y = 0; y < gridSize; y++) {
             let neighbors = 0;
             connections.forEach(([r, c]) => {
               const newX = x + r;
               const newY = y + c;
-              if (newX >= 0 && newX < rows && newY >= 0 && newY < columns) {
+              if (newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize) {
                 neighbors += g[newX][newY];
               }
             });
@@ -95,8 +90,8 @@ export default function Grid() {
       });
     });
 
-    setTimeout(runGame, 250);
-  }, []);
+    setTimeout(runGame, speed);
+  }, [speed]);
 
   // console.log(grid);
   return (
@@ -118,9 +113,9 @@ export default function Grid() {
               //   random
               if (running == false) {
                 const x = [];
-                for (let i = 0; i < rows; i++) {
+                for (let i = 0; i < gridSize; i++) {
                   x.push(
-                    Array.from(Array(columns), () =>
+                    Array.from(Array(gridSize), () =>
                       Math.random() > 0.5 ? 1 : 0
                     )
                   );
@@ -144,7 +139,7 @@ export default function Grid() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${columns}, 20px)`,
+            gridTemplateColumns: `repeat(${gridSize}, 20px)`,
             gridColumnGap: "0px",
             backgroundColor: "lightgray",
           }}
@@ -152,6 +147,7 @@ export default function Grid() {
           {grid.map((rows, x) =>
             rows.map((col, y) => (
               <div
+                // key={y}
                 onClick={() => {
                   if (running == false) {
                     const newGrid = produce(grid, (gridCopy) => {
@@ -171,7 +167,7 @@ export default function Grid() {
           )}
         </div>
       </div>
-      <Controls gridSize={gridSize} setGridSize={setGridSize} setGrid={setGrid} emptyGrid={emptyGrid}/>
+      <Controls speed={speed} setSpeed={setSpeed} />
     </SideBySide>
   );
 }

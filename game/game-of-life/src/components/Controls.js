@@ -21,12 +21,11 @@ const CenterControls = styled.div`
   }
 `;
 
-export default function Controls({gridSize, setGridSize, setGrid, emptyGrid}) {
+export default function Controls({speed, setSpeed}) {
 
   const changeSize = (e) => {
     console.log(e.target.value)
-    setGridSize(Number(e.target.value))
-    setGrid(emptyGrid())
+    setSpeed(Number(e.target.value))
   }
 
   return (
@@ -38,13 +37,13 @@ export default function Controls({gridSize, setGridSize, setGrid, emptyGrid}) {
           [e.target.name]= e.target.value
         }}
       >
-        Choose the size of the grid 25 - 30
+        Change the speed of life cycle.
         <input 
-        name="gridSize"
+        name="lifeSpeed"
         type="range"
-        min="25"
-        max="30"
-        value={gridSize}
+        min="100"
+        max="1000"
+        value={speed}
         onChange={changeSize}
         />
         <button>Change Grid Size</button>
