@@ -18,14 +18,25 @@ const CenterControls = styled.div`
     justify-content: space-around;
     align-items: center;
     text-align: center;
+    label {
+      color: lightgray;
+    }
   }
 `;
 
-export default function Controls({speed, setSpeed}) {
+export default function Controls({speed, setSpeed, gridSize, setGridSize, running}) {
 
+  const changeSpeed = (e) => {
+    console.log(e.target.value)
+    if (running == false) {
+      setSpeed(Number(e.target.value))
+    }
+  }
   const changeSize = (e) => {
     console.log(e.target.value)
-    setSpeed(Number(e.target.value))
+    if (running == false) {
+      setGridSize(Number(e.target.value))
+    }
   }
 
   return (
@@ -33,25 +44,39 @@ export default function Controls({speed, setSpeed}) {
       <h2>Controls</h2>
       <form
         onSubmit={(e) => {
-          // e.preventDefault();
-          [e.target.name]= e.target.value
+          e.preventDefault();
         }}
       >
-        Change the speed of life cycle.
+        <label htmlFor="lifeSpeed">Change the speed of life cycle.</label>
         <input 
         name="lifeSpeed"
         type="range"
         min="100"
         max="1000"
         value={speed}
+        onChange={changeSpeed}
+        />
+      </form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <label htmlFor="grid-size">Change grid size.</label>
+        <input 
+        name="grid-size"
+        type="range"
+        min="25"
+        max="30"
+        value={gridSize}
         onChange={changeSize}
         />
-        <button>Change Grid Size</button>
       </form>
 
       <form onSubmit={(e) => {
           e.preventDefault();
         }}>
+          
         <button>Change Grid Color</button>
       </form>
       <button>Change Cell Color</button>

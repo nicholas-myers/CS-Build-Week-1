@@ -55,11 +55,12 @@ export default function Grid() {
   const [grid, setGrid] = useState(() => {
     return emptyGrid();
   });
- 
+  useEffect(()=> {
+    setGrid(emptyGrid())
+  }, [gridSize])
 
   const [running, setRunning] = useState(false);
   const runningRef = useRef(running);
-  const speedRef = useRef(speed)
   runningRef.current = running;
   const runGame = useCallback(() => {
     if (!runningRef.current) {
@@ -91,7 +92,7 @@ export default function Grid() {
     });
 
     setTimeout(runGame, speed);
-  }, [speed]);
+  }, [speed, gridSize]);
 
   // console.log(grid);
   return (
@@ -167,7 +168,7 @@ export default function Grid() {
           )}
         </div>
       </div>
-      <Controls speed={speed} setSpeed={setSpeed} />
+      <Controls speed={speed} setSpeed={setSpeed} gridSize={gridSize} setGridSize={setGridSize} running={running}/>
     </SideBySide>
   );
 }
