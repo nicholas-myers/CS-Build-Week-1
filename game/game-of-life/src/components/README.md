@@ -12,3 +12,4 @@ Had Difficulty when trying to manipulate the game using the Immer Library. I lea
 2. The next step would be to implement a doubly Linked List and Trees to improve on the 2D Array data structure which is not very efficient but is a good working first pass solution.
 3. I would love to add more controls to the list to expand on user experience.
 4. Add number notches to the sliders for easier indication of what speed and size you are at.
+5. Add media queries. 
