@@ -13,6 +13,13 @@ const SideBySide = styled.section`
   label {
     color: lightgray;
   }
+  @media(max-width: 500px) {
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const GridControls = styled.div`
@@ -157,10 +164,10 @@ export default function Grid() {
             Clear
           </button>
         </GridControls>
-        <div
+        <div className="grid-container"
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${gridSize}, 20px)`,
+            gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
             gridColumnGap: "0px",
             backgroundColor: gridColors[0],
           }}
@@ -168,6 +175,7 @@ export default function Grid() {
           {grid.map((rows, x) =>
             rows.map((col, y) => (
               <div
+                className="grid-cell"
                 // key={y}
                 onClick={() => {
                   if (running == false) {
@@ -178,8 +186,8 @@ export default function Grid() {
                   }
                 }}
                 style={{
-                  width: 20,
-                  height: 20,
+                  width: 15,
+                  height: 15,
                   backgroundColor: grid[x][y] ? gridColors[2] : undefined,
                   border: `1px solid ${gridColors[1]}`,
                 }}

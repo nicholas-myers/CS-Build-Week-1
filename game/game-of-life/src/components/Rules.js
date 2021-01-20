@@ -19,6 +19,10 @@ const StyledRules = styled.section`
   li {
     margin: 1% 0;
   }
+  @media(max-width: 500px) {
+    width: 90%;
+    margin: 1% 0;
+  }
 `;
 
 export default function Rules() {

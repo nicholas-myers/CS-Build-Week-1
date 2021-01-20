@@ -21,6 +21,13 @@ const Hero = styled.div`
   padding: 1%;
   height: 80vh;
   align-items: center;
+  @media(max-width: 500px) {
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 
