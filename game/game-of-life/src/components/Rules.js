@@ -8,7 +8,6 @@ const StyledRules = styled.section`
   width: 30%;
   background-color: lightgray;
   padding: 1%;
-  /* height: 90%; */
   h2 {
     text-align: center;
     /* margin-bottom: 3%; */
@@ -18,6 +17,10 @@ const StyledRules = styled.section`
   }
   li {
     margin: 1% 0;
+  }
+  @media(max-width: 1000px) {
+    width:100%;
+    margin-top: 3%;
   }
   @media(max-width: 500px) {
     width: 90%;

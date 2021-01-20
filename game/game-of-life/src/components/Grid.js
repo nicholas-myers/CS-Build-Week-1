@@ -13,6 +13,10 @@ const SideBySide = styled.section`
   label {
     color: lightgray;
   }
+  @media(max-width: 1000px) {
+    width:100%;
+    padding: 0 5%;
+  }
   @media(max-width: 500px) {
     flex-flow: column;
     width: 100%;

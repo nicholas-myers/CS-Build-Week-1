@@ -21,6 +21,10 @@ const Hero = styled.div`
   padding: 1%;
   height: 80vh;
   align-items: center;
+  @media(max-width: 1000px) {
+    flex-flow: column;
+    height: 100%;
+  }
   @media(max-width: 500px) {
     flex-flow: column;
     height: 100%;
